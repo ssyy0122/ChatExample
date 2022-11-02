@@ -1,4 +1,12 @@
 package com.example.chatexample.Config;
 
-public class WebSocketConfig {
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+    @Override
+    // connection을 맺을때 CORS 허용
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/").setAllowedOrigins("*").withSockJS();
+    }
 }
