@@ -1,12 +1,17 @@
 package com.example.chatexample.Config;
 
-import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import com.example.chatexample.Handler.ChatHandler;
+import com.sun.xml.txw2.output.CharacterEscapeHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
-    @Override
-    // connection을 맺을때 CORS 허용
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/").setAllowedOrigins("*").withSockJS();
-    }
+@Configuration
+@EnableWebSocket
+public class WebSocketConfig implements WebSocketConfigurer {
+    @Autowired
+    ChatHandler chatHandler;
+
 }
